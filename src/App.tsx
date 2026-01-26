@@ -1,22 +1,27 @@
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer"
-import Navbar from "./components/Navbar/Navbar"
+import Layout from "./components/Layout/Layout";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import NewAdded from "./pages/NewAdded";
+import PopBooks from "./pages/PopBooks";
+import Activity from "./pages/Activity";
+import SignIn from "./pages/SignIn";
+import BookDetailPage from "./pages/BookDetailPage";
 import './App.css'
 
 function App() {
   return (
     <>
-      <Header />
-
-      <Navbar />
-
-      <main>
-        <h2>New added</h2>
-        <p>New added booklists</p>
-        <h2>Popular books</h2>
-        <p>Popular books booklists</p>
-      </main>
-      <Footer />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/Home" element={<Home />} />
+          <Route path="/NewAdded" element={<NewAdded />} />
+          <Route path="/PopBooks" element={<PopBooks />} />
+          <Route path="/book/:id" element={<BookDetailPage />} />
+          <Route path="/Activity" element={<Activity />} />
+          <Route path="/SignIn" element={<SignIn />} />
+        </Route>
+      </Routes>
     </>
   )
 }

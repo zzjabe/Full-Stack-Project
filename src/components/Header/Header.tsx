@@ -5,7 +5,7 @@ function Header() {
     return (
         <header className="header">
             <div className="logo">
-                <a href="logoImg" target="_blank">
+                <a href={logoImg} target="_blank">
                     <img src={logoImg} alt="Code and Coffee Logo" />
                 </a>
             </div>
