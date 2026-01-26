@@ -1,147 +1,121 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import type { Book } from "../../data/books";
-import './AddBookForm.css'
+import "./AddBookForm.css";
 
 type Props = {
-    books: Book[];
-    onAddBook: (
-        id: string, 
-        title: string, 
-        author: string, 
-        year: number, 
-        category: string, 
-        cover: string, 
-        description: string
-    ) => void;
+  onAddBook: (
+    id: string,
+    title: string,
+    author: string,
+    year: number,
+    category: string,
+    cover: string,
+    description: string
+  ) => void;
 };
 
-function AddBookForm({ books, onAddBook }: Props) {
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [year, setYear] = useState("");
-    const [category, setCategory] = useState("");
-    const [cover, setCover] = useState("");
-    const [description, setDescription] = useState("");
-    const [error, setError] = useState("");
+function AddBookForm({ onAddBook }: Props) {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [year, setYear] = useState<number | "">("");
+  const [category, setCategory] = useState("");
+  const [cover, setCover] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
 
-    function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        setError("");
+  const defaultCover = "https://covers.openlibrary.org/b/id/10909258-L.jpg";
 
-        if (title.trim() === "") {
-            setError("Title is required.");
-            return;
-        }
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
 
-        if (author.trim() === "") {
-            setError("Author is required.");
-            return;
-        }
-
-        const yearNum = parseInt(year.trim(), 10);
-        if (year.trim() === "" || isNaN(yearNum)) {
-            setError("Year must be a valid integer.");
-            return;
-        }
-
-        const newId = uuidv4();
-
-        onAddBook(
-            newId,
-            title.trim(),
-            author.trim(),
-            yearNum,
-            category.trim(),
-            cover.trim(),
-            description.trim()
-        );
-
-        setTitle("");
-        setAuthor("");
-        setYear("");
-        setCategory("");
-        setCover("");
-        setDescription("");
-        setError("");
+    if (title.trim() === "") {
+      setError("Title is required.");
+      return;
     }
 
-    return (
-        <form onSubmit={handleSubmit} className="add-book-form">
-            <h2>Add New Book</h2>
-            
-            {error && <div className="error-message">{error}</div>}
+    if (author.trim() === "") {
+      setError("Author is required.");
+      return;
+    }
 
-            <div className="form-group">
-                <label htmlFor="title">Title *:</label>
-                <input
-                    id="title"
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-            </div>
+    if (year === "" || isNaN(year)) {
+      setError("Year must be a valid number.");
+      return;
+    }
 
-            <div className="form-group">
-                <label htmlFor="author">Author *:</label>
-                <input
-                    id="author"
-                    type="text"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    required
-                />
-            </div>
+    const newId = uuidv4();
 
-            <div className="form-group">
-                <label htmlFor="year">Year *:</label>
-                <input
-                    id="year"
-                    type="number"
-                    value={year}
-                    onChange={(e) => setYear(e.target.value)}
-                    step="1"
-                    required
-                />
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="category">Category (optional):</label>
-                <input
-                    id="category"
-                    type="text"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    placeholder="e.g. Fiction, Science, History..."
-                />
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="cover">Cover URL (optional):</label>
-                <input
-                    id="cover"
-                    type="url"
-                    value={cover}
-                    onChange={(e) => setCover(e.target.value)}
-                    placeholder="https://example.com/book-cover.jpg"
-                />
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="description">Description (optional):</label>
-                <textarea
-                    id="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    rows={4}
-                    placeholder="Brief description of the book..."
-                />
-            </div>
-
-            <button type="submit" className="submit-button">Add Book</button>
-        </form>
+    onAddBook(
+      newId,
+      title.trim(),
+      author.trim(),
+      year,
+      category.trim() || "Uncategorized",
+      cover.trim() || defaultCover,
+      description.trim() || "No description."
     );
+
+    setTitle("");
+    setAuthor("");
+    setYear("");
+    setCategory("");
+    setCover("");
+    setDescription("");
+    setError("");
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="add-book-form">
+      <h2>Add New Book</h2>
+
+      {error && <div className="error-message">{error}</div>}
+
+      <div className="form-group">
+        <label>Title:</label>
+        <input value={title} onChange={(e) => setTitle(e.target.value)} />
+      </div>
+
+      <div className="form-group">
+        <label>Author:</label>
+        <input value={author} onChange={(e) => setAuthor(e.target.value)} />
+      </div>
+
+      <div className="form-group">
+        <label>Year:</label>
+        <input
+          type="number"
+          value={year}
+          onChange={(e) =>
+            setYear(e.target.value === "" ? "" : Number(e.target.value))
+          }
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Category:</label>
+        <input value={category} onChange={(e) => setCategory(e.target.value)} />
+      </div>
+
+      <div className="form-group">
+        <label>Cover URL:</label>
+        <input value={cover} onChange={(e) => setCover(e.target.value)} />
+      </div>
+
+      <div className="form-group">
+        <label>Description:</label>
+        <textarea
+          rows={4}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+
+      <button type="submit" className="submit-button">
+        Add Book
+      </button>
+    </form>
+  );
 }
 
 export default AddBookForm;
