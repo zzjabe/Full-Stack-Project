@@ -1,4 +1,5 @@
 import logoImg from "../../assets/logo.png";
+import Searchbox from "../Searchbox/Searchbox";
 import './Header.css'
 
 function Header() {
@@ -11,6 +12,9 @@ function Header() {
             </div>
             <div>
                 <h1>Code and Coffee's Library</h1>
+            </div>
+            <div>
+                <Searchbox />
             </div>
 
         </header>

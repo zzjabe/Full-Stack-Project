@@ -7,6 +7,7 @@ import Activity from "./pages/Activity";
 import SignIn from "./pages/SignIn";
 import BookDetailPage from "./pages/BookDetailPage";
 import './App.css'
+import SearchResultPage from "./pages/SearchResultPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/book/:id" element={<BookDetailPage />} />
           <Route path="/Activity" element={<Activity />} />
           <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/Search" element={<SearchResultPage />} />
         </Route>
       </Routes>
     </>
