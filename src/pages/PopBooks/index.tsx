@@ -1,14 +1,19 @@
-import { Pop_books } from "../../data/books";
+import type { Book } from "../../data/books";
 import { Link } from "react-router-dom";
-import './index.css'
+import "./index.css";
 
-function PopBooks(){
+type bookProps = {
+  books: Book[];
+};
+
+function PopBooks({ books }: bookProps) {
+  const popBooks = books.filter((book) => book.classification === "Pop Books");
   return (
     <div className="new-added-page">
       <h2 className="page-title">Popular Books</h2>
 
       <div className="books-row-grid">
-        {Pop_books.map((book) => (
+        {popBooks.map((book) => (
           <Link
             to={`/book/${book.id}`}
             className="mini-book-card"

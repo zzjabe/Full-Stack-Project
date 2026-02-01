@@ -1,14 +1,16 @@
 import { useSearchParams, Link } from "react-router-dom";
-import { New_added, Pop_books } from "../../data/books";
+import type { Book } from "../../data/books";
 import "./index.css";
 
-export default function SearchResultPage() {
+type Props = {
+  books: Book[];
+};
+
+export default function SearchResultPage({ books }: Props) {
   const [params] = useSearchParams();
   const q = (params.get("q") || "").toLowerCase();
 
-  const allBooks = [...New_added, ...Pop_books];
-
-  const results = allBooks.filter(
+  const results = books.filter(
     (b) =>
       b.title.toLowerCase().includes(q) ||
       b.author.toLowerCase().includes(q)

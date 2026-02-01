@@ -2,22 +2,24 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./AddBookForm.css";
 
-type Props = {
+type bookProps = {
   onAddBook: (
     id: string,
     title: string,
     author: string,
     year: number,
+    classification: string,
     category: string,
     cover: string,
-    description: string
+    description: string,
   ) => void;
 };
 
-function AddBookForm({ onAddBook }: Props) {
+function AddBookForm({ onAddBook }: bookProps) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [year, setYear] = useState<number | "">("");
+  const [classification, setClassification] = useState("New Added");
   const [category, setCategory] = useState("");
   const [cover, setCover] = useState("");
   const [description, setDescription] = useState("");
@@ -51,9 +53,10 @@ function AddBookForm({ onAddBook }: Props) {
       title.trim(),
       author.trim(),
       year,
+      classification,
       category.trim() || "Uncategorized",
       cover.trim() || defaultCover,
-      description.trim() || "No description."
+      description.trim() || "No description.",
     );
 
     setTitle("");
@@ -90,6 +93,17 @@ function AddBookForm({ onAddBook }: Props) {
             setYear(e.target.value === "" ? "" : Number(e.target.value))
           }
         />
+      </div>
+
+      <div className="form-group">
+        <label>Classification:</label>
+        <select
+          value={classification}
+          onChange={(e) => setClassification(e.target.value)}
+        >
+          <option value="New Added">New Added</option>
+          <option value="Pop Books">Pop Books</option>
+        </select>
       </div>
 
       <div className="form-group">

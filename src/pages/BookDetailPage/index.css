@@ -14,7 +14,6 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* 封面 */
 .detail-cover {
   width: 220px;
   height: 320px;
@@ -22,7 +21,6 @@
   border-radius: 10px;
 }
 
-/* 信息 */
 .detail-info h1 {
   margin: 0;
   font-size: 28px;
@@ -35,6 +33,7 @@
 }
 
 .detail-year,
+.detail-classification,
 .detail-category {
   margin-top: 4px;
   font-size: 14px;
