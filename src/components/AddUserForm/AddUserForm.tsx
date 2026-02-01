@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { User, UserCategory } from "../../data/users";
+import type { User } from "../../data/users";
 import { v4 as uuidv4 } from "uuid";
-import './AddUserForm.css'
+import "./AddUserForm.css";
 
 interface AddUserFormProps {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
@@ -10,7 +10,7 @@ interface AddUserFormProps {
 function AddUserForm({ setUsers }: AddUserFormProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [category, setCategory] = useState<UserCategory>("Normal");
+  const [category, setCategory] = useState<"Normal" | "Platinum">("Normal");
   const [error, setError] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
@@ -27,6 +27,8 @@ function AddUserForm({ setUsers }: AddUserFormProps) {
       lastName: lastName.trim(),
       category,
       createdAt: new Date().toISOString(),
+      readingList: [],
+      favouriteList: [],
     };
 
     setUsers((prev) => [newUser, ...prev]);
@@ -46,31 +48,31 @@ function AddUserForm({ setUsers }: AddUserFormProps) {
       <div className="form-group">
         <label>First Name:</label>
         <input
-            placeholder="Min 2 chars"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+          placeholder="Min 2 chars"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
         />
       </div>
 
       <div className="form-group">
         <label>Last Name:</label>
-        <input
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-        />
+        <input value={lastName} onChange={(e) => setLastName(e.target.value)} />
       </div>
+
       <div className="form-group">
         <label>Category:</label>
         <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value as UserCategory)}
+          value={category}
+          onChange={(e) => setCategory(e.target.value as "Normal" | "Platinum")}
         >
-            <option value="Normal">Normal</option>
-            <option value="Platinum">Platinum</option>
+          <option value="Normal">Normal</option>
+          <option value="Platinum">Platinum</option>
         </select>
       </div>
 
-      <button type="submit" className="submit-button">Add User</button>
+      <button type="submit" className="submit-button">
+        Add User
+      </button>
     </form>
   );
 }
