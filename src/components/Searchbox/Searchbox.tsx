@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./SearchBox.css";
+import "./Searchbox.css";
 
 export default function SearchBox() {
   const [keyword, setKeyword] = useState("");
