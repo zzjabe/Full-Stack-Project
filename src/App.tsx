@@ -80,12 +80,7 @@ function App() {
         <Route
           path="/users/:userId"
           element={
-            <UserDetailPage
-              users={users}
-              setUsers={setUsers}
-              books={books}
-              userId={currentUserId}
-            />
+            <UserDetailPage users={users} setUsers={setUsers} books={books} />
           }
         />
       </Route>

@@ -1,30 +1,25 @@
 import { Link } from "react-router-dom";
 import type { User } from "../../data/users";
 import type { Book } from "../../data/books";
+import { useParams } from "react-router-dom";
 import "./index.css";
 
 type Props = {
   users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   books: Book[];
-  userId: string;
 };
 
-export default function UserDetailPage({
-  users,
-  setUsers,
-  books,
-  userId,
-}: Props) {
+export default function UserDetailPage({ users, setUsers, books }: Props) {
+  const { userId } = useParams<{ userId: string }>();
+
   const user = users.find((u) => u.id === userId);
 
   if (!user) return <div>User not found</div>;
 
-  // 获取书籍详情
   const readingBooks = books.filter((b) => user.readingList.includes(b.id));
   const favouriteBooks = books.filter((b) => user.favouriteList.includes(b.id));
 
-  // 删除书籍函数
   const handleRemoveFromReading = (bookId: string) => {
     if (!confirm("Remove this book from Reading List?")) return;
 
@@ -61,7 +56,7 @@ export default function UserDetailPage({
       <p>Joined: {new Date(user.createdAt).toLocaleDateString()}</p>
 
       <section className="list-section">
-        <h2>📖 Reading List</h2>
+        <h2>Reading List</h2>
         {readingBooks.length === 0 ? (
           <p>No books in Reading List.</p>
         ) : (
@@ -82,7 +77,7 @@ export default function UserDetailPage({
       </section>
 
       <section className="list-section">
-        <h2>⭐ Favourite List</h2>
+        <h2>Favourite List</h2>
         {favouriteBooks.length === 0 ? (
           <p>No books in Favourite List.</p>
         ) : (
