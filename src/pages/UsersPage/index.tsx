@@ -2,6 +2,7 @@ import type { User } from "../../data/users";
 import AddUserForm from "../../components/AddUserForm/AddUserForm";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { initialUsers } from "../../data/users";
 import "./index.css";
 
 interface AddUserFormProps {
@@ -18,7 +19,7 @@ function UsersPage({ users, setUsers }: AddUserFormProps) {
         onClick={() => {
           if (confirm("Reset to initial users?")) {
             localStorage.removeItem("users");
-            window.location.reload();
+            setUsers(initialUsers);
           }
         }}
       >
