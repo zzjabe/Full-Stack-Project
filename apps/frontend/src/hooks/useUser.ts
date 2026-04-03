@@ -43,7 +43,7 @@ export function useUsers() {
 
   async function addToReading(userId: string, bookId: string) {
     try {
-      const res = await fetch(`${BASE_URL}users/${userId}/readings`, {
+      const res = await fetch(`${BASE_URL}/users/${userId}/readings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export function useUsers() {
 
   async function addToFavourite(userId: string, bookId: string) {
     try {
-      const res = await fetch(`${BASE_URL}users/${userId}/favourites`, {
+      const res = await fetch(`${BASE_URL}/users/${userId}/favourites`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,9 +79,12 @@ export function useUsers() {
 
   const removeFromReading = async (userId: string, bookId: string) => {
     try {
-      const res = await fetch(`${BASE_URL}users/${userId}/readings/${bookId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${BASE_URL}/users/${userId}/readings/${bookId}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       if (!res.ok) throw new Error("Failed to remove book");
 
@@ -95,7 +98,7 @@ export function useUsers() {
   const removeFromFavourite = async (userId: string, bookId: string) => {
     try {
       const res = await fetch(
-        `${BASE_URL}users/${userId}/favourites/${bookId}`,
+        `${BASE_URL}/users/${userId}/favourites/${bookId}`,
         {
           method: "DELETE",
         },
