@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #e26ba6;
+  color: white;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+  cursor: pointer;
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.header-text p {
+  margin: 5px 0 0;
+  opacity: 0.8;
+}

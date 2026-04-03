@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserCategory {
+  Normal
+  Platinum
+}
+
+model User {
+  id        String   @id @default(uuid())
+  firstName String
+  lastName  String
+  createdAt DateTime
+  category  UserCategory
+
+  readings   Reading[]
+  favourites Favourite[]
+}
+
+model Reading {
+  id     Int    @id @default(autoincrement())
+  userId String
+  bookId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Favourite {
+  id        Int    @id @default(autoincrement())
+  userId    String
+  bookId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Activity {
+  id             String   @id @default(cuid())
+  action         String
+  bookTitle      String?
+  classification String?
+  createdAt      DateTime @default(now())
+}
+
+model Book {
+  id             String @id @default(cuid())
+  title          String
+  author         String
+  year           Int
+  classification String
+  category       String
+  cover          String
+  description    String
+}
