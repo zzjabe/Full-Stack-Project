@@ -1,10 +1,10 @@
 import type { Book } from "../../../../shared/types/book";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = `${import.meta.env.VITE_API_URL}`;
 
 export const bookRepo = {
   async findAll(): Promise<Book[]> {
-    const res = await fetch(`${API_BASE_URL}/api/books`);
+    const res = await fetch(`${BASE_URL}/api/books`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch books");
@@ -19,7 +19,7 @@ export const bookRepo = {
   },
 
   async save(book: Omit<Book, "id">): Promise<Book> {
-    const res = await fetch(`${API_BASE_URL}/api/books`, {
+    const res = await fetch(`${BASE_URL}/api/books`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const bookRepo = {
   },
 
   async update(id: string, updated: Partial<Book>): Promise<Book> {
-    const res = await fetch(`${API_BASE_URL}/api/books/${id}`, {
+    const res = await fetch(`${BASE_URL}/api/books/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export const bookRepo = {
   },
 
   async remove(id: string): Promise<void> {
-    const res = await fetch(`${API_BASE_URL}/api/books/${id}`, {
+    const res = await fetch(`${BASE_URL}/api/books/${id}`, {
       method: "DELETE",
     });
 
