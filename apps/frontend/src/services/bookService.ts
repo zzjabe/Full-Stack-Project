@@ -1,5 +1,5 @@
 import { bookRepo } from "../repositories/bookRepo";
-import type { Book } from "../types/book";
+import type { Book } from "../../../../shared/types/book";
 
 export const bookService = {
   async getBooks(): Promise<Book[]> {
