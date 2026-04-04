@@ -1,0 +1,17 @@
+{
+  "relatedProjects": ["prj_qR4jHwUIaAdYPLG46WscfO7u1pIy"],
+
+  "git": {
+    "deploymentEnabled": {
+      "*": false,
+      "main": true
+    }
+  },
+
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.ts"
+    }
+  ]
+}
