@@ -1,4 +1,4 @@
-import type { Book } from "../../types/book";
+import type { Book } from "../../../../../shared/types/book";
 import "./AddBookForm.css";
 import { useAddBookForm } from "../../hooks/useAddBookForm";
 
@@ -12,18 +12,24 @@ type BookProps = {
 };
 
 function AddBookForm({ onAddBook }: BookProps) {
-
   const {
-    title, setTitle,
-    author, setAuthor,
-    year, setYear,
-    classification, setClassification,
-    category, setCategory,
-    cover, setCover,
-    description, setDescription,
+    title,
+    setTitle,
+    author,
+    setAuthor,
+    year,
+    setYear,
+    classification,
+    setClassification,
+    category,
+    setCategory,
+    cover,
+    setCover,
+    description,
+    setDescription,
     error,
     handleSubmit,
-  } = useAddBookForm( onAddBook );
+  } = useAddBookForm(onAddBook);
 
   return (
     <form onSubmit={handleSubmit} className="add-book-form">

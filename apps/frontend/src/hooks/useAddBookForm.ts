@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Book } from "../types/book";
+import type { Book } from "../../../../shared/types/book";
 import type { FormEvent } from "react";
 
 /*
@@ -9,7 +9,7 @@ and calls the onAddBook function when the form is submitted.
 This separates the form logic from the UI component.
 */
 
-export function useAddBookForm(onAddBook: (data: Omit<Book, "id">) => void){
+export function useAddBookForm(onAddBook: (data: Omit<Book, "id">) => void) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [year, setYear] = useState<number | "">("");
@@ -76,5 +76,4 @@ export function useAddBookForm(onAddBook: (data: Omit<Book, "id">) => void){
     error,
     handleSubmit,
   };
-
 }

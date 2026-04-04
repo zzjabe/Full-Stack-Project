@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Book } from "../../types/book";
+import type { Book } from "../../../../../shared/types/book";
 import "./BookList.css";
 
 type BookListProps = {

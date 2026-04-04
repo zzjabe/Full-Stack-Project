@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { bookService } from "../services/bookService";
 import { activityService } from "../services/activityService";
-import type { Book } from "../types/book";
+import type { Book } from "../../../../shared/types/book";
 
 export function useBooks() {
   const [books, setBooks] = useState<Book[]>([]);
